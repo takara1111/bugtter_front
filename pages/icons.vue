@@ -280,7 +280,8 @@
       'mdi-backburger',
       'mdi-backspace',
       'mdi-backup-restore',
-      'mdi-badminton'
+      'mdi-badminton',
+      'mdi-bug'
     ]
   })
   }

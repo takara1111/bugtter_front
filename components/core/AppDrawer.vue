@@ -109,6 +109,11 @@
             to: '/notifications',
             icon: 'mdi-bell',
             text: 'Notifications'
+          },
+          {
+            to: '/post',
+            icon: 'mdi-bug',
+            text: '投稿する'
           }
         ],
         responsive: true

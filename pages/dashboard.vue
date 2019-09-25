@@ -24,7 +24,7 @@
             >
               mdi-arrow-up
             </v-icon>
-            <span class="green--text">55%</span>&nbsp;
+            <span class="red--text">55%</span>&nbsp;
             increase in today's sales
           </p>
 
