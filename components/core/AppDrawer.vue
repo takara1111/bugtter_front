@@ -113,12 +113,17 @@
           {
             to: '/post',
             icon: 'mdi-bug',
-            text: '投稿する'
+            text: 'メモする'
           },
           {
             to: '/list',
             icon: 'mdi-book-open-outline',
             text: 'メモ一覧'
+          },
+          {
+            to: '/test',
+            icon: 'mdi-book-open-outline',
+            text: 'てすと'
           }
         ],
         responsive: true
