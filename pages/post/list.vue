@@ -19,7 +19,7 @@
             </template>
             <template slot="items" slot-scope="{ item }">
               <td>{{ item.id }}</td>
-              <td>{{ item.error_message }}</td>
+              <td><nuxt-link v-bind:to="{name:'post-id',params:{id:item.id}}">{{ item.error_message }}</nuxt-link></td>
             </template>
           </v-data-table>
         </material-card>

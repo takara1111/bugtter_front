@@ -111,12 +111,12 @@
             text: 'Notifications'
           },
           {
-            to: '/post',
+            to: '/post/new',
             icon: 'mdi-bug',
             text: 'メモする'
           },
           {
-            to: '/list',
+            to: '/post/list',
             icon: 'mdi-book-open-outline',
             text: 'メモ一覧'
           },
