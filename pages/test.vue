@@ -19,7 +19,7 @@
             </template>
             <template slot="items" slot-scope="{ item }">
               <td>{{ item.id }}</td>
-              <td>{{ item.title }}</td>
+              <td>{{ item.user_id }}</td>
               <td>{{ item.city }}</td>
               <td class="text-xs-right">{{ item.salary }}</td>
             </template>

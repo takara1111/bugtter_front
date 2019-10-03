@@ -1,9 +1,16 @@
 <template>
-  <v-container fill-height fluid grid-list-xl>
-    <v-layout justify-center wrap>
+  <v-container
+    fill-height
+    fluid
+    grid-list-xl
+  >
+    <v-layout
+      justify-center
+      wrap
+    >
       <v-flex md12>
         <material-card color="green" title="解決したバグ" text="Here is a subtitle for this table">
-          <v-data-table :headers="headers" :items="items" hide-actions>
+          <v-data-table :headers="test" :items="json_data" hide-actions>
             <template slot="headerCell" slot-scope="{ header }">
               <span
                 class="subheading font-weight-light text-success text--darken-3"
@@ -11,32 +18,8 @@
               />
             </template>
             <template slot="items" slot-scope="{ item }">
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
-      </v-flex>
-
-
-      <!-- ここからJSON -->
-      <v-flex md12>
-        <material-card
-          color="green"
-          flat
-          full-width
-          title="JSONでーた"
-          text="Here is a subtitle for this table"
-        >
-          <v-data-table :headers="headers" :items="json_data" hide-actions>
-            <template slot="headerCell" slot-scope="{ header }">
-              <span class="subheading font-weight-light text--darken-3" v-text="header.text" />
-            </template>
-            <template>
-              <!-- <td>{{ item.name }}</td> -->
-              <td>{{ json_data.title }}</td>
+              <td>{{ item.id }}</td>
+              <td>{{ item.error_message }}</td>
             </template>
           </v-data-table>
         </material-card>
@@ -46,82 +29,77 @@
 </template>
 
 <script>
-import materialCard from "~/components/material/AppCard";
-const axios = require("axios");
+  const axios = require('axios');
 
-let url = "http://jsonplaceholder.typicode.com/posts";
+  let url = "http://localhost:8080/api/v1/posts"
 
-export default {
-  layout: "dashboard",
-  components: {
-    materialCard
-  },
-  async asyncData() {
-    let result = await axios.get(url);
-    return { json_data: result.data };
-  },
-  data: () => ({
-    headers: [
-      {
-        sortable: false,
-        text: "Name",
-        value: "name"
-      },
-      {
-        sortable: false,
-        text: "Country",
-        value: "country"
-      },
-      {
-        sortable: false,
-        text: "City",
-        value: "city"
-      },
-      {
-        sortable: false,
-        text: "Salary",
-        value: "salary",
-        align: "right"
-      }
-    ],
-    items: [
-      {
-        name: "Dakota Rice",
-        country: "Niger",
-        city: "Oud-Tunrhout",
-        salary: "$35,738"
-      },
-      {
-        name: "Minerva Hooper",
-        country: "Curaçao",
-        city: "Sinaai-Waas",
-        salary: "$23,738"
-      },
-      {
-        name: "Sage Rodriguez",
-        country: "Netherlands",
-        city: "Overland Park",
-        salary: "$56,142"
-      },
-      {
-        name: "Philip Chanley",
-        country: "Korea, South",
-        city: "Gloucester",
-        salary: "$38,735"
-      },
-      {
-        name: "Doris Greene",
-        country: "Malawi",
-        city: "Feldkirchen in Kārnten",
-        salary: "$63,542"
-      },
-      {
-        name: "Mason Porter",
-        country: "Chile",
-        city: "Gloucester",
-        salary: "$78,615"
-      }
-    ]
-  })
-};
+  export default {
+    layout: 'dashboard',
+    created () {
+      axios.get(url).then((res) => {
+        
+        const items = [];
+        // オブジェクトの値を配列として取得
+        // `values`は`[ data1のオブジェクト, data2のオブジェクト ]`という配列になっている
+        const values = Object.values(res.data) 
+
+        // `forEach()`でひとつずつ処理していく
+        values.forEach((value) => {
+          const item = {
+            id: value.id,
+            error_message: value.error_message,
+            description: value.description
+          };
+
+          // `items`の一番後ろに追加
+          items.push(item)
+        });
+
+        // コンポーネントのデータに代入
+        this.json_data = items;
+      });
+    },
+    data: () => ({
+      json_data: [],
+      test: [
+        {
+          sortable: false,
+          text: "エラーメッセージ",
+          value: "error_message"
+        },
+        {
+          sortable: false,
+          text: "解決方法",
+          value: "description"
+        },
+      ],
+      headers: [
+        {
+          sortable: false,
+          text: "Name",
+          value: "name"
+        },
+        {
+          sortable: false,
+          text: "Country",
+          value: "country"
+        },
+        {
+          sortable: false,
+          text: "City",
+          value: "city"
+        },
+        {
+          sortable: false,
+          text: "Salary",
+          value: "salary",
+          align: "right"
+        }
+      ]
+    })
+  }
 </script>
+
+<style>
+
+</style>
