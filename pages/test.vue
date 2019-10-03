@@ -26,12 +26,6 @@
           </v-data-table>
         </material-card>
       </v-flex>
-
-      <v-flex
-        md12
-      >
-      <h1>{{ json_data.title }}</h1>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -101,44 +95,6 @@
           text: "Salary",
           value: "salary",
           align: "right"
-        }
-      ],
-      items: [
-        {
-          name: "Dakota Rice",
-          country: "Niger",
-          city: "Oud-Tunrhout",
-          salary: "$35,738"
-        },
-        {
-          name: "Minerva Hooper",
-          country: "Curaçao",
-          city: "Sinaai-Waas",
-          salary: "$23,738"
-        },
-        {
-          name: "Sage Rodriguez",
-          country: "Netherlands",
-          city: "Overland Park",
-          salary: "$56,142"
-        },
-        {
-          name: "Philip Chanley",
-          country: "Korea, South",
-          city: "Gloucester",
-          salary: "$38,735"
-        },
-        {
-          name: "Doris Greene",
-          country: "Malawi",
-          city: "Feldkirchen in Kārnten",
-          salary: "$63,542"
-        },
-        {
-          name: "Mason Porter",
-          country: "Chile",
-          city: "Gloucester",
-          salary: "$78,615"
         }
       ]
     })
