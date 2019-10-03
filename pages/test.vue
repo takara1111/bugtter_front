@@ -1,11 +1,148 @@
 <template>
-  
+  <v-container
+    fill-height
+    fluid
+    grid-list-xl
+  >
+    <v-layout
+      justify-center
+      wrap
+    >
+      <v-flex md12>
+        <material-card color="green" title="解決したバグ" text="Here is a subtitle for this table">
+          <v-data-table :headers="test" :items="json_data" hide-actions>
+            <template slot="headerCell" slot-scope="{ header }">
+              <span
+                class="subheading font-weight-light text-success text--darken-3"
+                v-text="header.text"
+              />
+            </template>
+            <template slot="items" slot-scope="{ item }">
+              <td>{{ item.id }}</td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.city }}</td>
+              <td class="text-xs-right">{{ item.salary }}</td>
+            </template>
+          </v-data-table>
+        </material-card>
+      </v-flex>
+
+      <v-flex
+        md12
+      >
+      <h1>{{ json_data.title }}</h1>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-export default {
+  const axios = require('axios');
 
-}
+  let url = "http://jsonplaceholder.typicode.com/posts/"
+
+  export default {
+    layout: 'dashboard',
+    created () {
+      axios.get(url).then((res) => {
+        
+        const items = [];
+        // オブジェクトの値を配列として取得
+        // `values`は`[ data1のオブジェクト, data2のオブジェクト ]`という配列になっている
+        const values = Object.values(res.data) 
+
+        // `forEach()`でひとつずつ処理していく
+        values.forEach((value) => {
+          const item = {
+            id: value.id,
+            title: value.title
+          };
+
+          // `items`の一番後ろに追加
+          items.push(item)
+        });
+
+        // コンポーネントのデータに代入
+        this.json_data = items;
+      });
+    },
+    data: () => ({
+      json_data: [],
+      test: [
+        {
+          sortable: false,
+          text: "あああ",
+          value: "name"
+        },
+        {
+          sortable: false,
+          text: "ううう",
+          value: "name"
+        },
+      ],
+      headers: [
+        {
+          sortable: false,
+          text: "Name",
+          value: "name"
+        },
+        {
+          sortable: false,
+          text: "Country",
+          value: "country"
+        },
+        {
+          sortable: false,
+          text: "City",
+          value: "city"
+        },
+        {
+          sortable: false,
+          text: "Salary",
+          value: "salary",
+          align: "right"
+        }
+      ],
+      items: [
+        {
+          name: "Dakota Rice",
+          country: "Niger",
+          city: "Oud-Tunrhout",
+          salary: "$35,738"
+        },
+        {
+          name: "Minerva Hooper",
+          country: "Curaçao",
+          city: "Sinaai-Waas",
+          salary: "$23,738"
+        },
+        {
+          name: "Sage Rodriguez",
+          country: "Netherlands",
+          city: "Overland Park",
+          salary: "$56,142"
+        },
+        {
+          name: "Philip Chanley",
+          country: "Korea, South",
+          city: "Gloucester",
+          salary: "$38,735"
+        },
+        {
+          name: "Doris Greene",
+          country: "Malawi",
+          city: "Feldkirchen in Kārnten",
+          salary: "$63,542"
+        },
+        {
+          name: "Mason Porter",
+          country: "Chile",
+          city: "Gloucester",
+          salary: "$78,615"
+        }
+      ]
+    })
+  }
 </script>
 
 <style>

@@ -1,39 +1,16 @@
 <template>
-  <v-container
-    fill-height
-    fluid
-    grid-list-xl
-  >
-    <v-layout
-      justify-center
-      wrap
-    >
-      <v-flex
-        md12
-      >
-        <material-card
-          color="green"
-          title="解決したバグ"
-          text="Here is a subtitle for this table"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
+  <v-container fill-height fluid grid-list-xl>
+    <v-layout justify-center wrap>
+      <v-flex md12>
+        <material-card color="green" title="解決したバグ" text="Here is a subtitle for this table">
+          <v-data-table :headers="headers" :items="items" hide-actions>
+            <template slot="headerCell" slot-scope="{ header }">
               <span
                 class="subheading font-weight-light text-success text--darken-3"
                 v-text="header.text"
               />
             </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
+            <template slot="items" slot-scope="{ item }">
               <td>{{ item.name }}</td>
               <td>{{ item.country }}</td>
               <td>{{ item.city }}</td>
@@ -42,9 +19,10 @@
           </v-data-table>
         </material-card>
       </v-flex>
-      <v-flex
-        md12
-      >
+
+
+      <!-- ここからJSON -->
+      <v-flex md12>
         <material-card
           color="green"
           flat
@@ -52,26 +30,12 @@
           title="JSONでーた"
           text="Here is a subtitle for this table"
         >
-          <v-data-table
-            :headers="headers"
-            :items="json_data"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
+          <v-data-table :headers="headers" :items="json_data" hide-actions>
+            <template slot="headerCell" slot-scope="{ header }">
+              <span class="subheading font-weight-light text--darken-3" v-text="header.text" />
             </template>
-            <template
-              slot="json_data"
-              slot-scope="{ json_data }"
-            >
-              <td>{{ json_data.userId }}</td>
-              <td>{{ json_data.id }}</td>
+            <template>
+              <!-- <td>{{ item.name }}</td> -->
               <td>{{ json_data.title }}</td>
             </template>
           </v-data-table>
@@ -82,80 +46,82 @@
 </template>
 
 <script>
-  import materialCard from '~/components/material/AppCard'
-  const axios = require('axios');
-  
-  let url = "http://jsonplaceholder.typicode.com/posts/"
+import materialCard from "~/components/material/AppCard";
+const axios = require("axios");
 
-  export default {
-    layout: 'dashboard',
-    components: {
-      materialCard
-    },
-    data: () => ({
+let url = "http://jsonplaceholder.typicode.com/posts";
+
+export default {
+  layout: "dashboard",
+  components: {
+    materialCard
+  },
+  async asyncData() {
+    let result = await axios.get(url);
+    return { json_data: result.data };
+  },
+  data: () => ({
     headers: [
       {
         sortable: false,
-        text: 'Name',
-        value: 'name'
+        text: "Name",
+        value: "name"
       },
       {
         sortable: false,
-        text: 'Country',
-        value: 'country'
+        text: "Country",
+        value: "country"
       },
       {
         sortable: false,
-        text: 'City',
-        value: 'city'
+        text: "City",
+        value: "city"
       },
       {
         sortable: false,
-        text: 'Salary',
-        value: 'salary',
-        align: 'right'
+        text: "Salary",
+        value: "salary",
+        align: "right"
       }
     ],
     items: [
       {
-        name: 'Dakota Rice',
-        country: 'Niger',
-        city: 'Oud-Tunrhout',
-        salary: '$35,738'
+        name: "Dakota Rice",
+        country: "Niger",
+        city: "Oud-Tunrhout",
+        salary: "$35,738"
       },
       {
-        name: 'Minerva Hooper',
-        country: 'Curaçao',
-        city: 'Sinaai-Waas',
-        salary: '$23,738'
-      }, {
-        name: 'Sage Rodriguez',
-        country: 'Netherlands',
-        city: 'Overland Park',
-        salary: '$56,142'
-      }, {
-        name: 'Philip Chanley',
-        country: 'Korea, South',
-        city: 'Gloucester',
-        salary: '$38,735'
-      }, {
-        name: 'Doris Greene',
-        country: 'Malawi',
-        city: 'Feldkirchen in Kārnten',
-        salary: '$63,542'
-      }, {
-        name: 'Mason Porter',
-        country: 'Chile',
-        city: 'Gloucester',
-        salary: '$78,615'
+        name: "Minerva Hooper",
+        country: "Curaçao",
+        city: "Sinaai-Waas",
+        salary: "$23,738"
+      },
+      {
+        name: "Sage Rodriguez",
+        country: "Netherlands",
+        city: "Overland Park",
+        salary: "$56,142"
+      },
+      {
+        name: "Philip Chanley",
+        country: "Korea, South",
+        city: "Gloucester",
+        salary: "$38,735"
+      },
+      {
+        name: "Doris Greene",
+        country: "Malawi",
+        city: "Feldkirchen in Kārnten",
+        salary: "$63,542"
+      },
+      {
+        name: "Mason Porter",
+        country: "Chile",
+        city: "Gloucester",
+        salary: "$78,615"
       }
-    ],
-    async asyncData (){
-    let id = 1;
-    let result = await axios.get(url + id);
-    return { json_data: result.data };
-  }
+    ]
   })
-
-  }
+};
 </script>
