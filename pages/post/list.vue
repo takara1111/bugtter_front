@@ -10,7 +10,7 @@
     >
       <v-flex md12>
         <material-card color="green" title="解決したバグ" text="Here is a subtitle for this table">
-          <v-data-table :headers="test" :items="json_data" hide-actions>
+          <v-data-table :headers="headers" :items="json_data" hide-actions>
             <template slot="headerCell" slot-scope="{ header }">
               <span
                 class="subheading font-weight-light text-success text--darken-3"
@@ -61,7 +61,7 @@
     },
     data: () => ({
       json_data: [],
-      test: [
+      headers: [
         {
           sortable: false,
           text: "エラーメッセージ",
@@ -72,29 +72,6 @@
           text: "解決方法",
           value: "description"
         },
-      ],
-      headers: [
-        {
-          sortable: false,
-          text: "Name",
-          value: "name"
-        },
-        {
-          sortable: false,
-          text: "Country",
-          value: "country"
-        },
-        {
-          sortable: false,
-          text: "City",
-          value: "city"
-        },
-        {
-          sortable: false,
-          text: "Salary",
-          value: "salary",
-          align: "right"
-        }
       ]
     })
   }
