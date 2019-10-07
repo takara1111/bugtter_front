@@ -19,7 +19,7 @@
             </template>
             <template slot="items" slot-scope="{ item }">
               <td>{{ item.id }}</td>
-              <td><nuxt-link v-bind:to="{name:'post-id',params:{id:item.id}}">{{ item.error_message }}</nuxt-link></td>
+              <td><nuxt-link v-bind:to="{name:'post-id-show',params:{id:item.id}}">{{ item.error_message }}</nuxt-link></td>
             </template>
           </v-data-table>
         </material-card>
@@ -35,6 +35,21 @@
 
   export default {
     layout: 'dashboard',
+    data: () => ({
+      json_data: [],
+      headers: [
+        {
+          sortable: false,
+          text: "エラーメッセージ",
+          value: "error_message"
+        },
+        {
+          sortable: false,
+          text: "解決方法",
+          value: "description"
+        },
+      ]
+    }),
     created () {
       axios.get(url).then((res) => {
         
@@ -58,22 +73,7 @@
         // コンポーネントのデータに代入
         this.json_data = items;
       });
-    },
-    data: () => ({
-      json_data: [],
-      headers: [
-        {
-          sortable: false,
-          text: "エラーメッセージ",
-          value: "error_message"
-        },
-        {
-          sortable: false,
-          text: "解決方法",
-          value: "description"
-        },
-      ]
-    })
+    }
   }
 </script>
 
