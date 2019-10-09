@@ -24,12 +24,14 @@
                   md12
                 >
                   <v-textarea
+                    v-model="error_message"
                     label="バグの内容・エラーメッセージ"
                     class="purple-input"
                     rows="3"/>
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea
+                    v-model="description"
                     class="purple-input"
                     label="解決方法"
                     value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -42,6 +44,7 @@
                   <v-btn
                     class="mx-0 font-weight-light"
                     color="success"
+                    v-on:click="submit"
                   >
                     メモする
                   </v-btn>
@@ -59,10 +62,32 @@
   import { mapGetters } from 'vuex'
   import materialCard from '~/components/material/AppCard'
 
+  const axios = require('axios');
+
   export default {
     layout: 'dashboard',
     components: {
       materialCard
+    },
+    data() {
+      return {
+        error_message:"",
+        description: ""
+      }
+    },
+    methods: {
+      submit: function() {
+        axios.post('http://localhost:8080/api/v1/posts', {
+          error_message: this.error_message,
+          description: this.description
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     },
     computed: {
       ...mapGetters({
