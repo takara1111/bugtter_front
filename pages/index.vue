@@ -19,6 +19,7 @@
                 <v-btn color="success" :disabled="isDisabled" @click.prevent="authenticate">Login</v-btn>
               </v-layout>
             </v-card-actions>
+            <nuxt-link to="/sign-up">"新規登録はこちら"</nuxt-link>
           </material-card>
         </v-flex>
       </v-layout>

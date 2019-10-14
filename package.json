@@ -9,7 +9,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "heroku-postbuild": "npm run build",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt"
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
