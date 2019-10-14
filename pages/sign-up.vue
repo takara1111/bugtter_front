@@ -17,7 +17,7 @@
             </v-card-text>
             <v-card-actions>
               <v-layout justify-center align-center> 
-                <v-btn color="success" @click.prevent="authenticate">登録</v-btn>
+                <v-btn color="success" @click.prevent="registration">登録</v-btn>
               </v-layout>
             </v-card-actions>
             <nuxt-link to="/">ログインはこちら</nuxt-link>
@@ -33,7 +33,6 @@
   import materialCard  from '~/components/material/AppCard'
 
   const axios = require('axios');
-
 
   export default {
     components: {
@@ -70,11 +69,6 @@
         .catch(function (error) {
           console.log(error);
         }.bind(this));
-      },
-
-      async authenticate() {
-          // await this.setUsername(this.defaultUserPassword);
-          this.$router.push({ path: 'icons' });
       }
     }
   }

@@ -6,17 +6,17 @@
           <material-card
             color="success"
             elevation="12"
-            title="Connexion"
+            title="ログイン"
           >
             <v-card-text>
               <v-form>
-                <v-text-field type="text" v-model="username" prepend-icon="person" name="username" label="Login" :placeholder="defaultUserPassword"></v-text-field>
+                <v-text-field type="text" v-model="email" prepend-icon="person" name="email" label="Login" :placeholder="defaultUserPassword"></v-text-field>
                 <v-text-field type="password" v-model="password" prepend-icon="lock" name="password" label="Password" :placeholder="defaultUserPassword"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-layout justify-center align-center>
-                <v-btn color="success" :disabled="isDisabled" @click.prevent="authenticate">Login</v-btn>
+                <v-btn color="success" @click.prevent="authenticate">Login</v-btn>
               </v-layout>
             </v-card-actions>
             <nuxt-link to="/sign-up">"新規登録はこちら"</nuxt-link>
@@ -31,33 +31,37 @@
   import { mapActions } from 'vuex'
   import materialCard  from '~/components/material/AppCard'
 
+  const axios = require('axios');
+
   export default {
     components: {
       materialCard
     },
     data() {
       return {
-        username: 'admin',
-        password: 'admin',
-        defaultUserPassword: 'admin'
-      }
-    },
-    computed: {
-      isDisabled() {
-        return this.username !== this.defaultUserPassword || this.password !== this.defaultUserPassword;
+        email: '',
+        password: '',
+        defaultUserPassword: ''
       }
     },
     methods: {
       ...mapActions({
         setUsername: 'user/setUsername'
       }),
-
-      async authenticate() {
-        if (!this.isDisabled) {
-          await this.setUsername(this.defaultUserPassword);
+      
+      authenticate: function() {
+        axios.post('http://localhost:8080/api/v1/users/sign_in', {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          console.log(response);
           this.$router.push({ path: 'dashboard' });
-        }
-      }
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        }.bind(this));
+      },
     }
   }
 </script>
