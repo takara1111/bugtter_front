@@ -9,10 +9,13 @@
       "request": "launch",
       "name": "Launch Chrome",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",”
+      "webRoot": "${workspaceFolder}",
       "runtimeArgs": [ 
         "--remote-debugging-port=9222"
-      ]
+      ],
+      "sourceMapPathOverrides": {
+        "webpack:///*.vue": "${workspaceFolder}/*.vue"
+        }
     },
     {
       "type": "node",
