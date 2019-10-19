@@ -81,7 +81,7 @@
         axios.post('http://localhost:8080/api/v1/posts', {
           error_message: this.error_message,
           description: this.description,
-          user_id: this.id
+          user_id: this.$store.state.user.userid
         })
         .then(function (response) {
           console.log(response);

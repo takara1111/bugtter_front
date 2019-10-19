@@ -131,6 +131,7 @@
     methods: {
       ...mapActions({
         setUsername: 'user/setUsername',
+        setUserid: 'user/setUserid',
         setDrawer: 'app/setDrawer'
       }),
 
@@ -150,7 +151,7 @@
         }
       },
       async logout() {
-        await this.setUsername(null);
+        await this.setUserid(null);
         this.$router.push({ path: '/' });
       }
     },
