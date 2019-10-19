@@ -37,6 +37,13 @@
                     value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                   />
                 </v-flex>
+                <v-select
+                  v-model="language"
+                  :items="languages"
+                  label="言語を選択"
+                  item-text
+                  solo
+                ></v-select>
                 <v-flex
                   xs12
                   text-xs-right
@@ -73,7 +80,8 @@
       return {
         error_message:"",
         description: "",
-        user_id: null
+        language: [],
+        languages: ['HTML', 'CSS', 'JavaScript', 'Ruby', 'PHP', 'Python', 'Java', 'Others']
       }
     },
     methods: {
@@ -81,6 +89,7 @@
         axios.post('http://localhost:8080/api/v1/posts', {
           error_message: this.error_message,
           description: this.description,
+          language: this.language,
           user_id: this.$store.state.user.userid
         })
         .then(function (response) {
