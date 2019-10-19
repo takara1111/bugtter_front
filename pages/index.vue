@@ -46,7 +46,8 @@
     },
     methods: {
       ...mapActions({
-        setUsername: 'user/setUsername'
+        setUsername: 'user/setUsername',
+        setUserid: 'user/setUserid'
       }),
       
       authenticate: function() {
@@ -56,6 +57,7 @@
         })
         .then(function (response) {
           console.log(response);
+          this.setUserid(response.data.id);
           this.$router.push({ path: 'dashboard' });
         }.bind(this))
         .catch(function (error) {

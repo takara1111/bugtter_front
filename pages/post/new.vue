@@ -72,14 +72,16 @@
     data() {
       return {
         error_message:"",
-        description: ""
+        description: "",
+        user_id: null
       }
     },
     methods: {
       submit: function() {
         axios.post('http://localhost:8080/api/v1/posts', {
           error_message: this.error_message,
-          description: this.description
+          description: this.description,
+          user_id: this.id
         })
         .then(function (response) {
           console.log(response);
