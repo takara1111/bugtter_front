@@ -11,15 +11,17 @@
       <v-flex md12>
         <material-card color="green">
           <v-data-table 
-            :headers="headers"
-            :items="json_data"
-            :search="search"
-            :server-items-length="totalPosts"
-            :loading="loading"
+              :headers="headers"
+              :items="json_data"
+              :search="search"
+              hide-actions
+              :rows-per-page-items="perPageItems"
+              :pagination.sync="pagination"
+              class="elevation-1"
             >
             <template slot="headerCell" slot-scope="{ header }">
               <span
-                class="subheading font-weight-light text-success text--darken-3"
+                class="subheading font-weight-light text--darken-3"
                 v-text="header.text"
               />
             </template>
@@ -31,8 +33,8 @@
           </v-data-table>
         </material-card>
         <v-pagination
-        v-model="pagination.current"
-        :length="pages"
+        v-model="pagination.page"
+        :length="5"
         ></v-pagination>
       </v-flex>
     </v-layout>
@@ -47,7 +49,11 @@
   export default {
     layout: 'dashboard',
     data: () => ({
-      json_data: [],
+      search: '',
+      pagination: {},
+      selected: [],
+      json_data: [], // axiosで取得した値を格納
+      perPageItems:[10,25,{"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}], // ページネーション用の設定
       headers: [
         {
           sortable: false,
@@ -65,8 +71,6 @@
           value: "language"
         }
       ],
-      pagination: {
-      },
       totalPosts: 0,
     }),
     computed: {
