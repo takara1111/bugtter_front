@@ -9,22 +9,33 @@
       wrap
     >
       <v-flex md12>
-        <material-card color="green" title="解決したバグ" text="Here is a subtitle for this table">
-          <v-data-table :headers="test" :items="json_data" hide-actions>
+        <material-card color="green">
+          <v-data-table 
+              :headers="headers"
+              :items="json_data"
+              :search="search"
+              hide-actions
+              :rows-per-page-items="perPageItems"
+              :pagination.sync="pagination"
+              class="elevation-1"
+            >
             <template slot="headerCell" slot-scope="{ header }">
               <span
-                class="subheading font-weight-light text-success text--darken-3"
+                class="subheading font-weight-light text--darken-3"
                 v-text="header.text"
               />
             </template>
             <template slot="items" slot-scope="{ item }">
-              <td>{{ item.id }}</td>
-              <td>{{ item.user_id }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
+              <td><nuxt-link v-bind:to="{name:'post-id-show',params:{id:item.id}}">{{ item.error_message }}</nuxt-link></td>
+              <td><nuxt-link v-bind:to="{name:'post-id-show',params:{id:item.id}}">{{ item.description }}</nuxt-link></td>
+              <td>{{ item.language }}</td>
             </template>
           </v-data-table>
         </material-card>
+        <v-pagination
+        v-model="pagination.page"
+        :length="5"
+        ></v-pagination>
       </v-flex>
     </v-layout>
   </v-container>
@@ -33,10 +44,43 @@
 <script>
   const axios = require('axios');
 
-  let url = "http://jsonplaceholder.typicode.com/posts/"
+  let url = "http://localhost:8080/api/v1/posts"
 
   export default {
     layout: 'dashboard',
+    data: () => ({
+      search: '',
+      pagination: {},
+      selected: [],
+      json_data: [], // axiosで取得した値を格納
+      perPageItems:[10,25,{"text":"$vuetify.dataIterator.rowsPerPageAll","value":-1}], // ページネーション用の設定
+      headers: [
+        {
+          sortable: false,
+          text: "エラーメッセージ",
+          value: "error_message"
+        },
+        {
+          sortable: false,
+          text: "解決方法",
+          value: "description"
+        },
+        {
+          sortable: true,
+          text: "言語",
+          value: "language"
+        }
+      ],
+      totalPosts: 0,
+    }),
+    computed: {
+      pages() {
+        if (this.pagination.rows_per_page === null || this.totalPosts === null) {
+          return 0;
+        }
+        return Math.ceil(this.totalPosts / this.pagination.rows_per_page);
+      }
+    },
     created () {
       axios.get(url).then((res) => {
         
@@ -49,7 +93,9 @@
         values.forEach((value) => {
           const item = {
             id: value.id,
-            title: value.title
+            error_message: value.error_message,
+            description: value.description,
+            language: value.language
           };
 
           // `items`の一番後ろに追加
@@ -58,46 +104,9 @@
 
         // コンポーネントのデータに代入
         this.json_data = items;
+        this.totalPosts = items.length
       });
-    },
-    data: () => ({
-      json_data: [],
-      test: [
-        {
-          sortable: false,
-          text: "あああ",
-          value: "name"
-        },
-        {
-          sortable: false,
-          text: "ううう",
-          value: "name"
-        },
-      ],
-      headers: [
-        {
-          sortable: false,
-          text: "Name",
-          value: "name"
-        },
-        {
-          sortable: false,
-          text: "Country",
-          value: "country"
-        },
-        {
-          sortable: false,
-          text: "City",
-          value: "city"
-        },
-        {
-          sortable: false,
-          text: "Salary",
-          value: "salary",
-          align: "right"
-        }
-      ]
-    })
+    }
   }
 </script>
 
