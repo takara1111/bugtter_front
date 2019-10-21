@@ -12,23 +12,23 @@
         md8
       >
         <material-card class="v-card-profile">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="130"
-          >
-            <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
-            >
-          </v-avatar>
           <v-card-text class="text-xs-center">
-            <h2 class="category text-gray font-weight-thin mb-3">aaa</h2>
+            <h2 class="category font-weight-medium mb-3">aaa</h2>
             <h4 class="card-title font-weight-light">{{ json_data.description }}</h4>
             <v-btn
               color="success"
               round
               class="font-weight-light"
-            >Follow</v-btn>
+              v-bind:to="{ name : 'post-id-edit', params:{ id:$route.params.id }}"
+              nuxt
+            >編集する</v-btn>
+            <v-btn
+              color="danger"
+              round
+              class="font-weight-light"
+              to="{ name : 'post-id-edit', params:{ id:$route.params.id }}"
+              nuxt
+            >削除する</v-btn>
           </v-card-text>
         </material-card>
       </v-flex>
