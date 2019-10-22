@@ -26,8 +26,7 @@
               color="danger"
               round
               class="font-weight-light"
-              to="{ name : 'post-id-edit', params:{ id:$route.params.id }}"
-              nuxt
+              v-on:click="destroy"
             >削除する</v-btn>
           </v-card-text>
         </material-card>
@@ -54,10 +53,24 @@
         json_data: []
       }
     },
+    methods:{
+      destroy: function() {
+        axios.delete('http://localhost:8080/api/v1/posts/' + this.postid , {
+        })
+        .then(function (response) {
+          console.log(response);
+          this.$router.push({ path: '/post/list' });
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+    },
     async asyncData (context) {
       let { data } = await axios.get('http://localhost:8080/api/v1/posts/' + context.params.id )
       return {
-        json_data: data
+        json_data: data,
+        postid: context.params.id // クエリパラメータを取得し保持させる
       }
     }
   }
