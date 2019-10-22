@@ -13,7 +13,7 @@
       >
         <material-card class="v-card-profile">
           <v-card-text class="text-xs-center">
-            <h2 class="category font-weight-medium mb-3">aaa</h2>
+            <h2 class="category font-weight-medium mb-3">{{ json_data.error_message }}</h2>
             <h4 class="card-title font-weight-light">{{ json_data.description }}</h4>
             <v-btn
               color="success"
