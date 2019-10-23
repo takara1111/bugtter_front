@@ -10,7 +10,6 @@
         class="tertiary--text font-weight-light"
       >
         <v-btn
-          v-if="responsive"
           class="default v-btn--simple"
           dark
           icon
@@ -29,20 +28,13 @@
         layout
         py-2
       >
-        <v-text-field
-          v-if="responsiveInput"
-          class="mr-4 mt-2 purple-input"
-          label="Search..."
-          hide-details
-          color="purple"
-        />
         <nuxt-link
           v-ripple
           class="toolbar-items"
-          to="/"
-          title="Dashboard"
+          to="/post/list"
+          title="メモ一覧"
         >
-          <v-icon color="tertiary">mdi-view-dashboard</v-icon>
+          <v-icon color="tertiary">mdi-book-open-outline</v-icon>
         </nuxt-link>
         <v-menu
           bottom
@@ -80,14 +72,14 @@
             </v-list>
           </v-card>
         </v-menu>
-        <nuxt-link
+        <!-- <nuxt-link
           v-ripple
           class="toolbar-items"
           to="/user-profile"
           title="User profile"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
-        </nuxt-link>
+        </nuxt-link> -->
         <nuxt-link
           v-ripple
           class="toolbar-items"
@@ -108,13 +100,9 @@
   export default {
     data: () => ({
       notifications: [
-        'Mike, John responded to your email',
-        'You have 5 new tasks',
-        'You\'re now a friend with Andrew',
-        'Another Notification',
-        'Another One'
+        
       ],
-      title: 'Dashboard',
+      title: '',
       responsive: true,
       responsiveInput: true
     }),

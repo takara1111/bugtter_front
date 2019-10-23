@@ -52,6 +52,7 @@
     middleware: 'authentication',
 
     data: () => ({
+      title: 'メモ一覧',
       search: '',
       pagination: {},
       selected: [],
