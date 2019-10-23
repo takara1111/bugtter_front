@@ -44,13 +44,14 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import materialCard from '~/components/material/AppCard'
-  
+
   const axios = require('axios');
   let url = "http://localhost:8080/api/v1/posts"
   // let id = this.nuxt.route.params.id
 
   export default {
     layout: 'dashboard',
+    middleware: 'authentication',
     components: {
       materialCard
     },

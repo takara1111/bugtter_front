@@ -73,6 +73,7 @@
 
   export default {
     layout: 'dashboard',
+    middleware: 'authentication',
     components: {
       materialCard
     },

@@ -366,7 +366,7 @@
 
   export default {
     layout: 'dashboard',
-    // middleware: 'authentication',
+    middleware: 'authentication',
     components: {
       materialCard,
       materialChartCard,

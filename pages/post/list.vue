@@ -49,6 +49,8 @@
   export default {
     layout: 'dashboard',
     middleware: 'clearNotification',
+    middleware: 'authentication',
+
     data: () => ({
       search: '',
       pagination: {},
