@@ -66,7 +66,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import materialCard from '~/components/material/AppCard'
 
   const axios = require('axios');
@@ -85,6 +85,10 @@
       }
     },
     methods: {
+      ...mapActions({
+        showFlashMessage: 'flush_message/showFlashMessage',
+      }),
+      // 投稿内容を送信する
       submit: function() {
         axios.post('http://localhost:8080/api/v1/posts', {
           error_message: this.error_message,
@@ -94,7 +98,9 @@
         })
         .then(function (response) {
           console.log(response);
-        })
+          this.showFlashMessage({text: "投稿しました"}) //フラッシュメッセージをセット
+          this.$router.push({name:'post-id-show', params:{ id:response.data.post.id }});
+        }.bind(this))
         .catch(function (error) {
           console.log(error);
         });

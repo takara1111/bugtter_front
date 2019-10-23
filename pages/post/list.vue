@@ -48,6 +48,7 @@
 
   export default {
     layout: 'dashboard',
+    middleware: 'clearNotification',
     data: () => ({
       search: '',
       pagination: {},
@@ -104,7 +105,8 @@
 
         // コンポーネントのデータに代入
         this.json_data = items;
-        this.totalPosts = items.length
+        this.totalPosts = items.length;
+
       });
     }
   }
