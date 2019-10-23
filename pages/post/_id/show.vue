@@ -11,6 +11,13 @@
         xs12
         md8
       >
+        <material-notification
+          class="mb-3"
+          color="info"
+          v-if="$store.state.flush_message.text"
+        >
+        {{ $store.state.flush_message.text }}
+        </material-notification>
         <material-card class="v-card-profile">
           <v-card-text class="text-xs-center">
             <h2 class="category font-weight-medium mb-3">{{ json_data.error_message }}</h2>
@@ -38,6 +45,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import materialCard from '~/components/material/AppCard'
+  import materialNotification from '~/components/material/AppNotification'
   
   const axios = require('axios');
   let url = "http://localhost:8080/api/v1/posts"
@@ -45,15 +53,19 @@
 
   export default {
     layout: 'dashboard',
+    middleware: 'authentication',
     components: {
-      materialCard
+      materialCard,
+      materialNotification
     },
     data() {
       return {
-        json_data: []
+        json_data: [],
+        success: true
       }
     },
     methods:{
+      // 投稿を削除する
       destroy: function() {
         axios.delete('http://localhost:8080/api/v1/posts/' + this.postid , {
         })

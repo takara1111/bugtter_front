@@ -42,15 +42,16 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import materialCard from '~/components/material/AppCard'
-  
+
   const axios = require('axios');
   let url = "http://localhost:8080/api/v1/posts"
   // let id = this.nuxt.route.params.id
 
   export default {
     layout: 'dashboard',
+    middleware: 'authentication',
     components: {
       materialCard
     },
@@ -61,6 +62,9 @@
       }
     },
     methods: {
+      ...mapActions({
+        showFlashMessage: 'flush_message/showFlashMessage',
+      }),
       submit: function() {
         axios.patch('http://localhost:8080/api/v1/posts/' + this.postid , {
           error_message: this.json_data.error_message,
@@ -70,6 +74,7 @@
         })
         .then(function (response) {
           console.log(response);
+          this.showFlashMessage({text: "編集に成功しました"}) // フラッシュメッセージをセット
           this.$router.push({ path: 'show' });
         }.bind(this))
         .catch(function (error) {

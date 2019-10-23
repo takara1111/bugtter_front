@@ -4,7 +4,6 @@
     :class="[`elevation-${elevation}`]"
     :value="value"
     class="v-alert--notification"
-    v-on="$listeners"
   >
     <slot />
   </v-alert>
@@ -13,7 +12,7 @@
 <script>
 export default {
   inheritAttrs: false,
-
+  
   props: {
     elevation: {
       type: [Number, String],

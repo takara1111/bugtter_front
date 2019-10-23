@@ -48,7 +48,11 @@
 
   export default {
     layout: 'dashboard',
+    middleware: 'clearNotification',
+    middleware: 'authentication',
+
     data: () => ({
+      title: 'メモ一覧',
       search: '',
       pagination: {},
       selected: [],
@@ -104,7 +108,8 @@
 
         // コンポーネントのデータに代入
         this.json_data = items;
-        this.totalPosts = items.length
+        this.totalPosts = items.length;
+
       });
     }
   }
