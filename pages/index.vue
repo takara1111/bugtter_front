@@ -19,8 +19,17 @@
                 <v-btn color="success" @click.prevent="authenticate">Login</v-btn>
               </v-layout>
             </v-card-actions>
-            <nuxt-link to="/sign-up">新規登録はこちら</nuxt-link>
+            <v-layout justify-center align-center>
+              <v-btn
+                color="success"
+                class="font-weight-light"
+                v-on:click="loginAsTestuser"
+              >テストユーザーでログイン</v-btn>
+            </v-layout>
+
           </material-card>
+                      <nuxt-link to="/sign-up">新規登録はこちら</nuxt-link>
+
         </v-flex>
       </v-layout>
     </v-container>
@@ -50,6 +59,7 @@
         setUserid: 'user/setUserid'
       }),
       
+      // ログイン認証
       authenticate: function() {
         axios.post('http://localhost:8080/api/v1/users/sign_in', {
           email: this.email,
@@ -64,6 +74,21 @@
           console.log(error);
         }.bind(this));
       },
+      // テストユーザーでログイン
+      loginAsTestuser: function() {
+        axios.post('http://localhost:8080/api/v1/users/sign_in', {
+          email: "test@test.com",
+          password: "test1234"
+        })
+        .then(function (response) {
+          console.log(response);
+          this.setUserid(response.data.id);
+          this.$router.push({ path: 'dashboard' });
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     }
   }
 </script>
