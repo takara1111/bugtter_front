@@ -73,6 +73,8 @@ export default {
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = 'inline-cheap-module-source-map'
+        const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+        config.plugins.push(new HardSourceWebpackPlugin())
       }
     }
   }
