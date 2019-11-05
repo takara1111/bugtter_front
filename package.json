@@ -10,6 +10,7 @@
     "start": "nuxt start",
     "heroku-postbuild": "npm run build",
     "generate": "nuxt generate",
+    "postinstall": "cd /home/site/wwwroot && /opt/nodejs/12.9.1/bin/node ./node_modules/nuxt/bin/nuxt-build",
     "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt"
   },
   "dependencies": {
