@@ -1,5 +1,6 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -50,7 +51,12 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
+
+  env: {
+    URL: process.env.API_URL
+  },
   /*
   ** Axios module configuration
   */
@@ -76,6 +82,9 @@ export default {
         const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
         config.plugins.push(new HardSourceWebpackPlugin())
       }
+      config.node = {
+        fs: "empty" 
+      };
     }
   }
 }
