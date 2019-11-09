@@ -42,6 +42,9 @@
 
   const axios = require('axios');
 
+  // 環境変数からAPIのURLを読み込み
+  const URL = process.env.API_URL;
+
   export default {
     components: {
       materialCard
@@ -61,7 +64,7 @@
       
       // ログイン認証
       authenticate: function() {
-        axios.post('http://localhost:8080/api/v1/users/sign_in', {
+        axios.post('http://' + URL + '/api/v1/users/sign_in', {
           email: this.email,
           password: this.password,
         })
@@ -76,7 +79,7 @@
       },
       // テストユーザーでログイン
       loginAsTestuser: function() {
-        axios.post('http://localhost:8080/api/v1/users/sign_in', {
+        axios.post('http://' + URL + '/api/v1/users/sign_in', {
           email: "test@test.com",
           password: "test1234"
         })

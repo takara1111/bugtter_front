@@ -4,6 +4,9 @@
   "description": "NuxtJs Dashboard",
   "author": "Jimmy Jouanne",
   "private": true,
+  "browser": {
+    "fs": false
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -16,6 +19,7 @@
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "@nuxtjs/axios": "^5.5.3",
+    "@nuxtjs/dotenv": "^1.4.1",
     "cross-env": "^5.2.0",
     "hard-source-webpack-plugin": "^0.13.1",
     "nuxt": "^2.8.0",
