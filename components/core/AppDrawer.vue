@@ -86,11 +86,6 @@
             text: 'Icons'
           },
           {
-            to: '/notifications',
-            icon: 'mdi-bell',
-            text: 'Notifications'
-          },
-          {
             to: '/post/new',
             icon: 'mdi-bug',
             text: 'メモする'
