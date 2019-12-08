@@ -26,10 +26,8 @@
                 v-on:click="loginAsTestuser"
               >テストユーザーでログイン</v-btn>
             </v-layout>
-
           </material-card>
-                      <nuxt-link to="/sign-up">新規登録はこちら</nuxt-link>
-
+          <!-- <nuxt-link to="/sign-up">新規登録はこちら</nuxt-link> -->
         </v-flex>
       </v-layout>
     </v-container>
@@ -86,7 +84,7 @@
         .then(function (response) {
           console.log(response);
           this.setUserid(response.data.id);
-          this.$router.push({ path: 'dashboard' });
+          this.$router.push({ path: 'user-profile' });
         }.bind(this))
         .catch(function (error) {
           console.log(error);

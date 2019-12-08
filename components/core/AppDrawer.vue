@@ -76,14 +76,9 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/dashboard',
-            icon: 'mdi-view-dashboard',
-            text: 'Dashboard'
-          },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
+            to: '/user-profile',
+            icon: 'mdi-account',
+            text: 'プロフィール'
           },
           {
             to: '/post/new',
@@ -95,11 +90,6 @@
             icon: 'mdi-book-open-outline',
             text: 'メモ一覧'
           },
-          {
-            to: '/test',
-            icon: 'mdi-book-open-outline',
-            text: 'てすと'
-          }
         ],
         responsive: true
       }

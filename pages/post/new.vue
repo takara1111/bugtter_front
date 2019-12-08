@@ -71,6 +71,9 @@
 
   const axios = require('axios');
 
+  // 環境変数からAPIのURLを読み込み
+  const URL = process.env.API_URL;
+
   export default {
     layout: 'dashboard',
     middleware: 'authentication',
@@ -91,7 +94,7 @@
       }),
       // 投稿内容を送信する
       submit: function() {
-        axios.post('http://localhost:8080/api/v1/posts', {
+        axios.post('http://' + URL + '/api/v1/posts/' ,{
           error_message: this.error_message,
           description: this.description,
           language: this.language,
