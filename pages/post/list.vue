@@ -44,7 +44,8 @@
 <script>
   const axios = require('axios');
 
-  let url = "http://localhost:8080/api/v1/posts"
+  // 環境変数からAPIのURLを読み込み
+  const URL = process.env.API_URL;
 
   export default {
     layout: 'dashboard',
@@ -86,7 +87,7 @@
       }
     },
     created () {
-      axios.get(url).then((res) => {
+      axios.get('http://' + URL + '/api/v1/posts').then((res) => {
         
         const items = [];
         // オブジェクトの値を配列として取得

@@ -46,8 +46,9 @@
   import materialCard from '~/components/material/AppCard'
 
   const axios = require('axios');
-  let url = "http://localhost:8080/api/v1/posts"
-  // let id = this.nuxt.route.params.id
+  
+  // 環境変数からAPIのURLを読み込み
+  const URL = process.env.API_URL;
 
   export default {
     layout: 'dashboard',
@@ -66,7 +67,7 @@
         showFlashMessage: 'flush_message/showFlashMessage',
       }),
       submit: function() {
-        axios.patch('http://localhost:8080/api/v1/posts/' + this.postid , {
+        axios.patch('http://' + URL + '/api/v1/posts/' + this.postid , {
           error_message: this.json_data.error_message,
           description: this.json_data.description,
           language: this.json_data.language,
@@ -83,7 +84,7 @@
       }
     },
     async asyncData (context) {
-      let { data } = await axios.get('http://localhost:8080/api/v1/posts/' + context.params.id )
+      let { data } = await axios.get('http://' + URL + '/api/v1/posts/' + context.params.id )
       return {
         json_data: data,
         postid: context.params.id // クエリパラメータを取得し保持させる

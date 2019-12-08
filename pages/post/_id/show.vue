@@ -48,8 +48,9 @@
   import materialNotification from '~/components/material/AppNotification'
   
   const axios = require('axios');
-  let url = "http://localhost:8080/api/v1/posts"
-  // let id = this.nuxt.route.params.id
+  
+  // 環境変数からAPIのURLを読み込み
+  const URL = process.env.API_URL;
 
   export default {
     layout: 'dashboard',
@@ -67,7 +68,7 @@
     methods:{
       // 投稿を削除する
       destroy: function() {
-        axios.delete('http://localhost:8080/api/v1/posts/' + this.postid , {
+        axios.delete('http://' + URL + '/api/v1/posts/' + this.postid , {
         })
         .then(function (response) {
           console.log(response);
@@ -79,7 +80,7 @@
       },
     },
     async asyncData (context) {
-      let { data } = await axios.get('http://localhost:8080/api/v1/posts/' + context.params.id )
+      let { data } = await axios.get('http://' + URL + '/api/v1/posts/' + context.params.id )
       return {
         json_data: data,
         postid: context.params.id // クエリパラメータを取得し保持させる
