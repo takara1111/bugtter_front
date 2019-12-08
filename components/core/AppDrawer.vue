@@ -76,6 +76,11 @@
         logo: '/vuetifylogo.png',
         links: [
           {
+            to: '/user-profile',
+            icon: 'mdi-account',
+            text: 'プロフィール'
+          },
+          {
             to: '/post/new',
             icon: 'mdi-bug',
             text: 'メモする'
